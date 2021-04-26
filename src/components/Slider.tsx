@@ -3,8 +3,13 @@ import Arrows from './arrows';
 import Dots from './Dots';
 import SliderContent from './SliderContent';
 import { images } from './sliderImage';
+import styled from 'styled-components';
 
 const len = images.length - 1;
+
+const StyledContainer = styled.div`
+  
+`;
 
 const Slider = () => {
 
@@ -32,7 +37,7 @@ const Slider = () => {
   }
   
   return (
-    <div className="slider-container">
+    <StyledContainer className="slider-container">
       <SliderContent activeIndex={activeIndex}/>
       <Arrows 
         prevSlide={handlePrevSlide} 
@@ -42,7 +47,7 @@ const Slider = () => {
         activeIndex={activeIndex}
         onClick={slidesOnClick}
       />
-    </div>
+    </StyledContainer>
   )
 }
 
