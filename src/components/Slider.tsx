@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Arrows from './arrows';
 import Dots from './Dots';
 import SliderContent from './SliderContent';
@@ -7,13 +7,25 @@ import styled from 'styled-components';
 
 const len = images.length - 1;
 
-const StyledContainer = styled.div`
-  
+const SliderContainer = styled.div`
+  height: 50vh;
+  width: 100%;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
 `;
 
 const Slider = () => {
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex(activeIndex === len? 0: activeIndex + 1);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [activeIndex]);
 
   const handlePrevSlide = () => {
     console.log("Prev");
@@ -37,7 +49,7 @@ const Slider = () => {
   }
   
   return (
-    <StyledContainer className="slider-container">
+    <SliderContainer className="slider-container">
       <SliderContent activeIndex={activeIndex}/>
       <Arrows 
         prevSlide={handlePrevSlide} 
@@ -47,7 +59,7 @@ const Slider = () => {
         activeIndex={activeIndex}
         onClick={slidesOnClick}
       />
-    </StyledContainer>
+    </SliderContainer>
   )
 }
 
